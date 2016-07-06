@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour {
     public float speedX;
     public float JumpSpeedY;
     private float speed;
+    private double timer;
 
     public bool Jumping = false;
     public bool FacingRight;
@@ -18,7 +19,7 @@ public class PlayerManager : MonoBehaviour {
     void Start () {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-
+        FacingRight = true;
 	}
 	
 	// Update is called once per frame
@@ -45,31 +46,53 @@ public class PlayerManager : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            if ( startTime ==0 )
-            {
-                startTime = Time.time;
-                secondaryTime = Time.time;
-            }
-            if (Time.time-startTime>0.3)
-            {
-                rb.AddForce(new Vector2(rb.velocity.x, JumpSpeedY));
-                startTime = 0;
-                
-            }
+            timer = 0.2;
             
         }
-        if (Input.GetKeyUp(KeyCode.W)&& Time.time -startTime <0.3)
+        if (timer > 0)
         {
-            rb.AddForce(new Vector2(rb.velocity.x, Time.time - startTime * 1000));
-            startTime = 0;
-            
+            if (Input.GetKeyUp(KeyCode.W))
+            {
+                rb.AddForce(new Vector2(rb.velocity.x, JumpSpeedY));
+                timer = 0;
+            }
+            else
+            {
+                timer -= Time.deltaTime;
+                if (timer <= 0)
+                {
+                    rb.AddForce(new Vector2(rb.velocity.x, JumpSpeedY * 1.4f));
+                }
+            }
         }
        
 
     }
+    
 
     public void MovePlayer(float playerSpeed)
     {
         rb.velocity = new Vector3(speed, rb.velocity.y, 0);
+
+        if (speed > 0 && !FacingRight || speed < 0 && FacingRight)
+        {
+            FlipPlayerX();
+        }
+        if(playerSpeed == 0 && rb.velocity.y == 0)
+        {
+            anim.SetInteger("State", 0);
+        }
+        if(playerSpeed <0 || playerSpeed>0)
+        {
+            anim.SetInteger("State", 1);
+        }
+    }
+    public void FlipPlayerX()
+    {
+        FacingRight = !FacingRight;
+        Vector3 temp = transform.localScale;
+        temp.x = -temp.x;
+        transform.localScale = temp;
+        
     }
 }
