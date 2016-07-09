@@ -45,7 +45,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\TextBoxManager.cs" />
+     <Compile Include="Assets\Scripts\TextImport.cs" />
      <Compile Include="Assets\sprites\Boy\PlayerManager.cs" />
+     <None Include="Assets\text\test_text.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
