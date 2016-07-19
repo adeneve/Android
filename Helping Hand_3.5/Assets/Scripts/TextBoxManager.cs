@@ -17,7 +17,7 @@ public class TextBoxManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
+        TextBox.SetActive(false);
         if (textfile != null)
         {
             textlines = (textfile.text.Split('\n'));
@@ -32,7 +32,7 @@ public class TextBoxManager : MonoBehaviour
     void Update()
     {
         theText.text = textlines[currentline];
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) && TextBox.activeSelf)
         {
             currentline = currentline + 1;
         }
