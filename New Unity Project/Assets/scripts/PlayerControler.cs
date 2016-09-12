@@ -72,12 +72,20 @@ public class PlayerControler : MonoBehaviour {
 
 			} else {
 				
-					yCount--;
-					ChangeColor (Player.transform.position);
-					Player.transform.position = new Vector3 (x, y - 2f, z);
-					timeStart = Time.time;
+				ready = true;
 				
 
+			}
+		}
+		if (Input.GetKeyUp (KeyCode.DownArrow) == true) {
+			ready = false;
+		}
+		if (Input.GetKey (KeyCode.DownArrow) == true && ready == true) {
+			if (Time.time - timeStart >= 1f) {
+				yCount--;
+				ChangeColor (Player.transform.position);
+				Player.transform.position = new Vector3 (x, y - 2f, z);
+				timeStart = Time.time + 1f;
 			}
 		}
 
@@ -85,21 +93,41 @@ public class PlayerControler : MonoBehaviour {
 			if (xCount == 2) {
 
 			} else {
+				ready = true;
+			}
+		}
+		if (Input.GetKeyUp (KeyCode.RightArrow) == true) {
+			ready = false;
+		}
+		if (Input.GetKey (KeyCode.RightArrow) == true && ready == true) {
+			if (Time.time - timeStart >= 1f) {
 				xCount++;
 				ChangeColor (Player.transform.position);
 				Player.transform.position = new Vector3 (x + 2f, y, z);
+				timeStart = Time.time + 1f;
 			}
 		}
+
 
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
 			if (xCount == 0) {
 
 			} else {
-				xCount--;
-				ChangeColor (Player.transform.position);
-				Player.transform.position = new Vector3 (x - 2f, y, z);
+				ready = true;
 			}
 		}
+		if (Input.GetKeyUp (KeyCode.LeftArrow) == true) {
+			ready = false;
+		}
+		if (Input.GetKey (KeyCode.LeftArrow) == true && ready == true) {
+			if (Time.time - timeStart >= 1f) {
+				xCount--;
+				ChangeColor (Player.transform.position);
+				Player.transform.position = new Vector3 (x - 2f, y , z);
+				timeStart = Time.time + 1f;
+			}
+		}
+
 			
 	}
 	void ChangeColor(Vector3 area){
