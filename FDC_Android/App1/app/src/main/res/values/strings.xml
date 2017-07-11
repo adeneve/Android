@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FoodCheck</string>
+    <string name="hello">hello there</string>
+    <string name="Login">login</string>
+</resources>
