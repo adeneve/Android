@@ -26,12 +26,12 @@ import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import android.util.Log;
-
+import android.content.Intent;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    Button loginB;
+    Button loginB, RegB;
     EditText et1, et2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         loginB = (Button)findViewById(R.id.button1);
+        RegB = (Button) findViewById(R.id.button2);
         et1 = (EditText) findViewById(R.id.editText1);
         et2 = (EditText) findViewById(R.id.editText2);
 
@@ -58,8 +59,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    public void reg(View v){
+        Intent intent = new Intent(this, RegisterPage.class);
+        startActivity(intent);
     }
 }
+
 
 class AsyncPost extends AsyncTask<String, Void, Void>{
     int accepted = 0;
